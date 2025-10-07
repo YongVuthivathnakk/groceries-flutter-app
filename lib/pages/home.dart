@@ -12,64 +12,124 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<FreshFoodModel> food = [];
 
+  // functions
   void _getFood() {
     food = FreshFoodModel.getFood();
   }
 
   @override
   Widget build(BuildContext context) {
+    // Call functions
     _getFood();
+
     return Scaffold(
       appBar: appBar(),
+      floatingActionButton: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          // The floating button itself
+          FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.black,
+            child: SvgPicture.asset(
+              "assets/icons/shopping-cart.svg",
+              color: Colors.white,
+            ),
+          ),
+
+          // The red badge (top-left corner)
+          Positioned(
+            top: -14.5, // moves upward
+            left: 45, // moves to left
+            child: Container(
+              padding: EdgeInsets.all(7.5),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                "1",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ), 
+              ),
+            ),
+          ),
+        ],
+      ),
       body: ListView(
         children: [
           _landingTitle(),
-          SizedBox(height: 20),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Fresh items",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+          SizedBox(height: 30),
+          _freshFood(),
+          SizedBox(height: 40),
+        ],
+      ),
+    );
+  }
 
-                // Container(
-                //   child: ListView.separated(
-                //     shrinkWrap: true,
-                //     itemCount: food.length,
-                //     separatorBuilder: (context, index) => SizedBox(width: 25),
-                //     itemBuilder: (context, index) {
-                //       return Container(child: Text(food[index].name));
-                //     },
-                //   ),
-                // ),
-                Container(
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // <-- 2 items per row
-                      crossAxisSpacing: 25, // space between columns
-                      mainAxisSpacing: 25, // space between rows
-                      childAspectRatio:
-                          1.2, // adjust item size ratio (width / height)
-                    ),
-                    itemCount: food.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(food[index].name),
-                      );
-                    },
-                  ),
-                ),
-              ],
+  Padding _freshFood() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Fresh items", style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 20),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // <-- 2 items per row
+              crossAxisSpacing: 25, // space between columns
+              mainAxisSpacing: 25, // space between rows
+              childAspectRatio: 0.7,
             ),
+            itemCount: food.length,
+            itemBuilder: (context, index) {
+              return Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: food[index].backgroundColor.withOpacity(0.6),
+                  border: Border.all(
+                    color: food[index].borderColor,
+                    width: 2,
+                    style: BorderStyle.solid,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 15),
+
+                    SvgPicture.asset(
+                      food[index].iconPath,
+                      height: 60,
+                      width: 60,
+                    ),
+                    SizedBox(height: 10),
+                    Text(food[index].name),
+                    SizedBox(height: 20),
+
+                    MaterialButton(
+                      onPressed: () {},
+                      color: food[index].priceColor,
+                      child: Text(
+                        food[index].price,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ],
       ),
