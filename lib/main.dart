@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:groceries_shoping_flutter_app/pages/home.dart';
 import 'package:groceries_shoping_flutter_app/pages/intro.dart';
 
 void main() {
