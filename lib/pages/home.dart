@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:groceries_shoping_flutter_app/models/cart_item_model.dart';
 import 'package:groceries_shoping_flutter_app/models/fresh_food_model.dart';
+import 'package:groceries_shoping_flutter_app/pages/cart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,9 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<FreshFoodModel> food = [];
-
+  
   // functions
-  void _getFood() {
+  void _getFood() { 
     food = FreshFoodModel.getFood();
   }
 
@@ -23,42 +25,8 @@ class _HomePageState extends State<HomePage> {
     _getFood();
 
     return Scaffold(
-      appBar: appBar(),
-      floatingActionButton: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // The floating button itself
-          FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Colors.black,
-            child: SvgPicture.asset(
-              "assets/icons/shopping-cart.svg",
-              color: Colors.white,
-            ),
-          ),
-
-          // The red badge (top-left corner)
-          Positioned(
-            top: -14.5, // moves upward
-            left: 45, // moves to left
-            child: Container(
-              padding: EdgeInsets.all(7.5),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              child: Text(
-                "1",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ), 
-              ),
-            ),
-          ),
-        ],
-      ),
+      appBar: _appBar(),
+      floatingActionButton: _floatingCartButton(context),
       body: ListView(
         children: [
           _landingTitle(),
@@ -67,6 +35,52 @@ class _HomePageState extends State<HomePage> {
           SizedBox(height: 40),
         ],
       ),
+    );
+  }
+
+  Stack _floatingCartButton(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        // The floating button itself
+        FloatingActionButton(
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return CartPage();
+              }
+            )
+          ),
+          backgroundColor: Colors.black,
+          child: SvgPicture.asset(
+            "assets/icons/shopping-cart.svg",
+            color: Colors.white,
+          ),
+        ),
+
+        // The red badge (top-left corner)
+        if(cartItems.item.isNotEmpty) 
+        Positioned(
+          top: -14.5, // moves upward
+          left: 45, // moves to left
+          child: Container(
+            padding: EdgeInsets.all(7.5),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              "${cartItems.item.length}",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+              ), 
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -115,10 +129,13 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(height: 20),
 
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartItems.addItem(food[index]);
+                        setState(() {});
+                      },
                       color: food[index].priceColor,
                       child: Text(
-                        food[index].price,
+                        "\$${food[index].price.toStringAsFixed(2)}",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -145,7 +162,7 @@ class _HomePageState extends State<HomePage> {
           Text("Good morning", style: TextStyle(color: Colors.grey)),
           SizedBox(height: 10),
           Text(
-            "Let’s  order fresh items for you",
+            "Let's  order fresh items for you",
             style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
           ),
         ],
@@ -153,12 +170,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  AppBar appBar() {
+  AppBar _appBar() {
     return AppBar(
       leadingWidth: 65,
       title: const Text(
         "Groceries App",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.w500),
       ),
 
       actions: [

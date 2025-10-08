@@ -6,7 +6,8 @@ class FreshFoodModel {
   Color borderColor;
   Color backgroundColor;
   Color priceColor;
-  String price;
+  double price;
+  void Function()? onPressed;
 
   FreshFoodModel({
     required this.name,
@@ -15,6 +16,7 @@ class FreshFoodModel {
     required this.backgroundColor,
     required this.priceColor,
     required this.price,
+
   });
 
   static List<FreshFoodModel> getFood() {
@@ -27,7 +29,7 @@ class FreshFoodModel {
         borderColor: Color(0xff1DAC1D),
         backgroundColor: Color(0xffA5EBA5),
         priceColor: Color(0xff008000),
-        price: r"$4.00",
+        price: 4.00,
       ),
     );
 
@@ -38,7 +40,7 @@ class FreshFoodModel {
         borderColor: Color(0xffFFC559),
         backgroundColor: Color(0xffFFFF68),
         priceColor: Color(0xffFFA600),
-        price: r"$2.50",
+        price: 2.50,
       ),
     );
 
@@ -49,7 +51,7 @@ class FreshFoodModel {
         borderColor: Color(0xff604830),
         backgroundColor: Color(0xff604830),
         priceColor: Color(0xff604830),
-        price: r"$5.50",
+        price: 5.50,
       ),
     );
 
@@ -60,7 +62,7 @@ class FreshFoodModel {
         borderColor: Color(0xff1DAC1D),
         backgroundColor: Color(0xffA5EBA5),
         priceColor: Color(0xff008000),
-        price: r"$6.00",
+        price: 6.00,
       ),
     );
 
@@ -72,7 +74,7 @@ class FreshFoodModel {
         borderColor: Color(0xff558B2F),
         backgroundColor: Color(0xff8BC34A),
         priceColor: Color(0xff33691E),
-        price: r"$5.50",
+        price: 5.50,
       ),
     );
 
@@ -84,7 +86,7 @@ class FreshFoodModel {
         borderColor: Color(0xffF44336),
         backgroundColor: Color(0xffFF6F65),
         priceColor: Color(0xffD1262C),
-        price: r"$2.50",
+        price: 2.50,
       ),
     );
 
@@ -96,7 +98,7 @@ class FreshFoodModel {
         borderColor: Color(0xffFFB300),
         backgroundColor: Color(0xffFFF1BA),
         priceColor: Color(0xffFFA000),
-        price: r"$6.50",
+        price: 6.50,
       ),
     );
 
@@ -108,7 +110,7 @@ class FreshFoodModel {
         borderColor: Color(0xffA52A2A),
         backgroundColor: Color(0xffFF7E82),
         priceColor: Color(0xffA52A2A),
-        price: r"$5.50",
+        price: 5.50,
       ),
     );
 
