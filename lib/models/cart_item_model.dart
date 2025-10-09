@@ -1,23 +1,27 @@
 import 'package:groceries_shoping_flutter_app/models/fresh_food_model.dart';
 
-
-
-
-
 class CartItemModel {
   Map<String, Map<String, dynamic>> item;
-  
+
   CartItemModel(this.item);
 
-
   void addItem(FreshFoodModel foodItem) {
-    if(item.containsKey(foodItem.name)) {
+    if (item.containsKey(foodItem.name)) {
       item[foodItem.name]!['quantity'] += 1;
     } else {
-      item[foodItem.name] = {
-        'item': foodItem,
-        'quantity': 1,
-      };
+      item[foodItem.name] = {'item': foodItem, 'quantity': 1};
+    }
+  }
+
+  void decreaseItem(FreshFoodModel foodItem) {
+    if (item.containsKey(foodItem.name)) {
+      final currentQty = item[foodItem.name]!['quantity'];
+      if (currentQty > 1) {
+        item[foodItem.name]!['quantity'] = currentQty - 1;
+      } else {
+        // remove item completely if quantity hits 0
+        item.remove(foodItem.name);
+      }
     }
   }
 
@@ -31,6 +35,5 @@ class CartItemModel {
     return total;
   }
 }
-
 
 CartItemModel cartItems = CartItemModel({});

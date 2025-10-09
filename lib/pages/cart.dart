@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:groceries_shoping_flutter_app/models/cart_item_model.dart';
@@ -23,7 +24,7 @@ class CartPage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Colors.grey.withOpacity(0.5), width: 1),
+          top: BorderSide(color: Colors.grey.withOpacity(0.2), width: 1),
         ),
       ),
       child: BottomAppBar(
@@ -85,13 +86,9 @@ class CartPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.01),
-                      blurRadius: 2,
-                      spreadRadius: 0.8,
-                    ),
-                  ],
+                  border: Border.all(
+                    color: Colors.grey.withOpacity(0.2)
+                  )
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,22 +129,62 @@ class CartPage extends StatelessWidget {
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 20, right: 20),
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(2.5),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      blurRadius: 2,
+                                      spreadRadius: 0.8,
+                                    ),
+                                  ],
+                                ),
+                                child: SvgPicture.asset(
+                                  "assets/icons/minus.svg",
+                                  height: 17.5,
+                                  width: 17.5,
+                                ),
+                              ),
+                              Container(
+                                width: 30,
+                                child: Text(
+                                  "$quantity",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(2.5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xff962EFF),
+                                ),
+                                child: SvgPicture.asset(
+                                  "assets/icons/plus.svg",
+                                  height: 17.5,
+                                  width: 17.5,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
                         Positioned(
-                          top: -20,
-                          left: 30,
+                          top: -10,
+                          left: 75,
                           child: SvgPicture.asset(
                             "assets/icons/circle-x.svg",
                             color: Colors.red,
-                            height: 17.5,
-                            width: 17.5,
+                            height: 15,
+                            width: 15,
                           ),
-                        ),
-                        Row(
-                          children: [
-                            SvgPicture.asset("assets/icons/minus.svg"),
-                            Text("$quantity"),
-                            SvgPicture.asset("assets/icons/plus.svg"),
-                          ],
                         ),
                       ],
                     ),
