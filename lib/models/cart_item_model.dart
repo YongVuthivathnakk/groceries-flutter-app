@@ -21,7 +21,16 @@ class CartItemModel {
     }
   }
 
-
+  double calculateTotal() {
+    double total = 0;
+    for (var entry in item.entries) {
+      final food = entry.value['item'] as FreshFoodModel;
+      final quantity = entry.value['quantity'] as int;
+      total += food.price * quantity;
+    }
+    return total;
+  }
 }
+
 
 CartItemModel cartItems = CartItemModel({});

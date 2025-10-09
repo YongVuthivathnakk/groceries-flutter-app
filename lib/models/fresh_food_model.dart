@@ -16,6 +16,7 @@ class FreshFoodModel {
     required this.backgroundColor,
     required this.priceColor,
     required this.price,
+    required this.onPressed,
 
   });
 
@@ -30,6 +31,7 @@ class FreshFoodModel {
         backgroundColor: Color(0xffA5EBA5),
         priceColor: Color(0xff008000),
         price: 4.00,
+        onPressed: () {}
       ),
     );
 
@@ -41,6 +43,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xffFFFF68),
         priceColor: Color(0xffFFA600),
         price: 2.50,
+        onPressed: () {}
+
       ),
     );
 
@@ -52,6 +56,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xff604830),
         priceColor: Color(0xff604830),
         price: 5.50,
+        onPressed: () {}
+
       ),
     );
 
@@ -63,6 +69,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xffA5EBA5),
         priceColor: Color(0xff008000),
         price: 6.00,
+        onPressed: () {}
+
       ),
     );
 
@@ -75,6 +83,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xff8BC34A),
         priceColor: Color(0xff33691E),
         price: 5.50,
+        onPressed: () {}
+
       ),
     );
 
@@ -87,6 +97,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xffFF6F65),
         priceColor: Color(0xffD1262C),
         price: 2.50,
+        onPressed: () {}
+
       ),
     );
 
@@ -99,6 +111,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xffFFF1BA),
         priceColor: Color(0xffFFA000),
         price: 6.50,
+        onPressed: () {}
+
       ),
     );
 
@@ -111,6 +125,8 @@ class FreshFoodModel {
         backgroundColor: Color(0xffFF7E82),
         priceColor: Color(0xffA52A2A),
         price: 5.50,
+        onPressed: () {}
+
       ),
     );
 

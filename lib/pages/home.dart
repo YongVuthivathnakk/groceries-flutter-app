@@ -121,8 +121,8 @@ class _HomePageState extends State<HomePage> {
 
                     SvgPicture.asset(
                       food[index].iconPath,
-                      height: 60,
-                      width: 60,
+                      height: 70,
+                      width: 70,
                     ),
                     SizedBox(height: 10),
                     Text(food[index].name),
